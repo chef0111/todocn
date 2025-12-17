@@ -32,6 +32,7 @@ const TodoApp = ({ className }: TodoAppProps) => {
   const [filter, setFilter] = useState<TodoFilter>("all");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [selectionResetKey, setSelectionResetKey] = useState(0);
+  const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
 
   useEffect(() => {
     saveTodos(todos);
@@ -42,9 +43,7 @@ const TodoApp = ({ className }: TodoAppProps) => {
   };
 
   const handleEdit = (todo: Todo) => {
-    const nextName = window.prompt("Edit todo", todo.name);
-    if (nextName === null) return;
-    setTodos((prev) => editTodo(prev, todo.id, { name: nextName }));
+    setEditingTodo(todo);
   };
 
   const handleDelete = (todoId: string) => {
@@ -62,6 +61,15 @@ const TodoApp = ({ className }: TodoAppProps) => {
     setSelectionResetKey((key) => key + 1);
   };
 
+  const handleSubmitEdit = (id: string, name: string) => {
+    setTodos((prev) => editTodo(prev, id, { name }));
+    setEditingTodo(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingTodo(null);
+  };
+
   const visibleTodos = useMemo(
     () => filterTodo(todos, filter),
     [todos, filter]
@@ -74,7 +82,13 @@ const TodoApp = ({ className }: TodoAppProps) => {
         <CardDescription>Manage your todos</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <TodoForm onCreate={handleCreate} existingTodos={todos} />
+        <TodoForm
+          onCreate={handleCreate}
+          onEdit={handleSubmitEdit}
+          onCancelEdit={handleCancelEdit}
+          existingTodos={todos}
+          editingTodo={editingTodo}
+        />
         <TodoTabs value={filter} onValueChange={setFilter} />
         <TodoTable
           data={visibleTodos}

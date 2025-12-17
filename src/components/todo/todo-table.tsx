@@ -8,6 +8,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  type PaginationState,
   type SortingState,
   useReactTable,
   type VisibilityState,
@@ -34,7 +35,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-import { EmptyTodo } from "./";
+import { EmptyTodo, TodoPagination } from "./";
 
 export type Todo = {
   id: string;
@@ -168,6 +169,10 @@ export default function TodoTable({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 5,
+  });
 
   const columns = useMemo(
     () => createColumns(onEdit, onDelete, onStatusChange),
@@ -193,7 +198,9 @@ export default function TodoTable({
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination,
     },
+    onPaginationChange: setPagination,
   });
 
   useEffect(() => {
@@ -276,12 +283,14 @@ export default function TodoTable({
           </TableBody>
         </Table>
       </div>
-      {selectedFilteredTodosCount > 0 && (
-        <div className="text-muted-foreground flex items-center justify-end space-x-2 pt-2 text-sm">
-          {selectedFilteredTodosCount} of {selectedTodosCount}{" "}
-          {selectedTodosCount === 1 ? "todo" : "todos"} selected
-        </div>
-      )}
+      <TodoPagination
+        canPreviousPage={table.getCanPreviousPage()}
+        canNextPage={table.getCanNextPage()}
+        onPreviousPage={table.previousPage}
+        onNextPage={table.nextPage}
+        selectedCount={selectedFilteredTodosCount}
+        totalCount={selectedTodosCount}
+      />
     </div>
   );
 }
