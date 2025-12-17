@@ -262,6 +262,7 @@ export default function TodoTable({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="smooth-hover"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

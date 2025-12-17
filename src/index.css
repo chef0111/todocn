@@ -133,6 +133,10 @@
   }
 }
 
+@utility smooth-hover {
+  @apply transition-none ease-out not-[&:hover]:transition-colors not-[&:hover]:duration-200 hover:transition-none;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
