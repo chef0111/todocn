@@ -9,7 +9,7 @@ export function App() {
         <ThemeSwitcher className="scale-120" />
       </section>
       <section className="flex h-screen w-screen items-start justify-center">
-        <TodoApp className="mt-30" />
+        <TodoApp className="mt-24" />
       </section>
     </ThemeProvider>
   );

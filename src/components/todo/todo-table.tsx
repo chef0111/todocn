@@ -228,7 +228,7 @@ export default function TodoTable({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className="bg-muted dark:bg-background/30"
+                className="bg-muted hover:bg-muted dark:bg-background/30"
               >
                 {headerGroup.headers.map((header) => {
                   const nameColumn = header.column.id === "name";
