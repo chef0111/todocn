@@ -11,8 +11,8 @@ import type { Todo } from "./";
 const TodoSchema = z.object({
   content: z
     .string()
-    .min(1)
-    .max(50, { message: "Todo must be less than 50 characters" }),
+    .min(1, { message: "Todo content is required" })
+    .max(50, { message: "Todo content must not exceed 50 characters" }),
 });
 
 type TodoFormValues = z.infer<typeof TodoSchema>;
