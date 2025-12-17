@@ -1,3 +1,7 @@
-# React + TypeScript + Vite + shadcn/ui
+## TodoCN
 
-This is a template for a new Vite project with React, TypeScript, and shadcn/ui.
+Simple todo application made by Chef0111.
+
+Featuring: React 19, shadcn/ui, TansStack Table.
+
+No backend, no database, just a simple todo list.
