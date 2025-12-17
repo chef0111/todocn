@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
+
 import { useTheme } from "@/context/theme-provider";
+import { cn } from "@/lib/utils";
+
+import { Button } from "../ui/button";
 
 const themes = [
   {
