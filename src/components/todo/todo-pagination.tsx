@@ -27,9 +27,9 @@ const TodoPagination = ({
   totalCount,
 }: TodoPaginationProps) => {
   return (
-    <div className="mt-3 flex items-center justify-between gap-4">
+    <div className="mt-3 flex flex-col items-center">
       {selectedCount > 0 && (
-        <div className="text-muted-foreground text-sm">
+        <div className="text-muted-foreground mr-1 w-full text-right text-sm">
           {selectedCount} of {totalCount} {totalCount === 1 ? "todo" : "todos"}{" "}
           selected
         </div>
